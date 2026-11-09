@@ -200,6 +200,22 @@ dl{margin:0}
 .stub .nome{display:block;font-family:var(--display);font-weight:700;font-size:clamp(28px,3vw,36px);line-height:1;margin:8px 0 10px}
 .stub .quando{display:inline-block;font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-top:2px dotted var(--ink);padding-top:8px}
 .disco .nota{margin:20px 0 0;font-size:15px;color:var(--cocoa)}
+.disco .stubs{gap:14px;max-width:840px}
+.disco .stub{padding:12px 16px 14px;box-shadow:3px 3px 0 var(--ink)}
+.disco .stub .nome{font-size:clamp(20px,2vw,24px);margin:4px 0 8px}
+.disco .stub .tipo{font-size:11px}
+.disco .stub .quando{font-size:12px;padding-top:6px}
+/* três lançamentos: faixas horizontais, como contracapa de disco */
+.lanc .stubs{grid-template-columns:1fr;gap:0;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+.lanc .stub{display:grid;grid-template-columns:130px minmax(0,1fr) minmax(0,1.3fr) auto;align-items:center;gap:20px;border:0;border-top:2px solid var(--ink);box-shadow:none;padding:18px 24px}
+.lanc .stub:first-child{border-top:0}
+.lanc .stub .nome{margin:0;font-size:clamp(26px,2.8vw,34px)}
+.lanc .stub .desc{margin:0}
+.lanc .stub .tipo{color:inherit;opacity:.85}
+.lanc .stub .quando{border:0;padding:0;text-align:right}
+.lanc .stub:nth-child(1){background:var(--jeans);color:var(--paper)}
+.lanc .stub:nth-child(2){background:var(--olive);color:var(--ink)}
+.lanc .stub:nth-child(3){background:var(--wine);color:var(--sand)}
 
 /* ===== universo ===== */
 #universo{background:var(--ink);color:var(--paper);border-top:2px solid var(--ink)}
@@ -316,6 +332,8 @@ dl{margin:0}
   .redes{grid-template-columns:1fr}
   .pilares{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .perfil{grid-template-columns:1fr}
+  .lanc .stub{grid-template-columns:1fr;gap:4px;padding:16px 18px}
+  .lanc .stub .quando{text-align:left}
   .vazio{grid-template-columns:1fr}
   .meta-row{grid-template-columns:1fr;gap:4px}
   .star.hide-sm{display:none}
@@ -544,11 +562,11 @@ dl{margin:0}
       <h2>Todo dia no feed</h2>
       <p class="lede">Violão na escada, o manual do caipira em São Paulo e o desafio Pula Comigo.</p>
       <div class="redes">
-        <a class="rede" href="https://www.tiktok.com/@dodyfaf" target="_blank" rel="noopener">
-          <span class="plat">tiktok</span><span class="handle">@dodyfaf</span><span class="desc">Vídeos novos todos os dias</span>
-        </a>
         <a class="rede" href="https://www.instagram.com/dodyfaf/" target="_blank" rel="noopener">
           <span class="plat">instagram</span><span class="handle">@dodyfaf</span><span class="desc">Reels, bastidores e Stories</span>
+        </a>
+        <a class="rede" href="https://www.tiktok.com/@dodyfaf" target="_blank" rel="noopener">
+          <span class="plat">tiktok</span><span class="handle">@dodyfaf</span><span class="desc">Vídeos novos todos os dias</span>
         </a>
       </div>
     </div>
