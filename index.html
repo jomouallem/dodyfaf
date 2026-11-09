@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Dody: sertanejo pra quem ouve sertanejo e pra quem acha que não ouve. O álbum Deselegante vem aí.">
+<title>Dody · Deselegante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500;700;900&family=Doto:wght@700;900&family=Archivo:wght@400;500;700&family=Major+Mono+Display&display=swap">
+<style>
+/* Colagem: céu recortado, nuvem em chamas, painel de LED no pasto, foto colada com fita.
+   Cada seção é uma tira de papel de outra cor; o painel de LED reaparece como letreiro e como capa. */
+:root{
+  color-scheme: light;
+  --sky:#8DBAD6; --sky-top:#6F9FC4; --jeans:#3E5F8A; --jeans-dk:#2C4566;
+  --sand:#FAE3B1; --paper:#FBF3E2; --mustard:#D4A21F; --olive:#998731;
+  --grass:#6E7E2B; --grass-dk:#4E5C1E;
+  --wine:#7D2027; --cocoa:#673C34; --ink:#22140F;
+  --led:#4E8CC9; --led-glow:#EAF5FF;
+  --on-wine:#F2C9A8; --on-cocoa:#E8CFA8; --on-jeans:#D5E3F2;
+  --display:"Grenze Gotisch", "UnifrakturMaguntia", Georgia, serif;
+  --led-face:"Doto", "Courier New", ui-monospace, monospace;
+  --body:"Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --label:"Major Mono Display", "Courier New", ui-monospace, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--wine)}
+/* grão de impressão por cima de tudo */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.16;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .13 0 0 0 0 .08 0 0 0 0 .06 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mustard);outline-offset:3px;border-radius:2px}
+
+.wrap{
+  max-width:1160px;margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+.band > .wrap{padding-block:clamp(64px,9vw,112px)}
+.label{
+  font-family:var(--label);font-size:13px;letter-spacing:.08em;text-transform:lowercase;margin:0 0 18px;
+}
+h2{
+  font-family:var(--display);font-weight:700;line-height:1;letter-spacing:.005em;
+  font-size:clamp(44px,7.4vw,92px);margin:0 0 24px;text-wrap:balance;
+}
+.lede{font-size:clamp(17px,1.9vw,20px);line-height:1.6;max-width:60ch;margin:0 0 16px}
+
+/* botões: tiras de papel com sombra dura */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.02em;
+  padding:12px 18px;border:2px solid var(--ink);border-radius:2px;
+  background:var(--mustard);color:var(--ink);text-decoration:none;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.alt{background:var(--paper)}
+.btn.dark{background:var(--ink);color:var(--sand);box-shadow:4px 4px 0 var(--mustard);border-color:var(--ink)}
+.btn.dark:hover{box-shadow:6px 6px 0 var(--mustard)}
+
+/* cabeçalho */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--wine);color:var(--sand);border-bottom:2px solid var(--ink)}
+.top .wrap{display:flex;align-items:center;gap:22px;padding-block:10px}
+.brand{font-family:var(--display);font-weight:900;font-size:30px;line-height:1;text-decoration:none;color:var(--sand)}
+.nav{display:flex;gap:20px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-family:var(--label);font-size:13px;letter-spacing:.06em;text-decoration:none;color:var(--on-wine);padding-block:6px}
+.nav a:hover{color:var(--sand)}
+.top .btn{padding:8px 14px;font-size:14px;box-shadow:3px 3px 0 var(--ink)}
+
+/* ===== cena do topo ===== */
+.scene{
+  position:relative;overflow:hidden;
+  height:clamp(560px,60vw,780px);
+  background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky) 62%);
+  border-bottom:2px solid var(--ink);
+}
+.fire{position:absolute;inset:0;width:100%;height:100%}
+.star{position:absolute;width:var(--s,56px);height:var(--s,56px);filter:drop-shadow(2px 2px 0 rgba(34,20,15,.25))}
+.grass{
+  position:absolute;left:0;right:0;bottom:0;height:31%;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.05 .9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .26 0 0 0 0 .06 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23t)'/%3E%3C/svg%3E"),
+    linear-gradient(180deg,#8A9A3A 0%,var(--grass) 35%,var(--grass-dk) 100%);
+  clip-path:polygon(0 9%,8% 5%,17% 8%,29% 2%,41% 7%,52% 3%,63% 8%,74% 4%,86% 7%,100% 2%,100% 100%,0 100%);
+}
+
+/* painel de LED */
+.billboard{
+  position:absolute;right:7%;bottom:13%;width:clamp(300px,46vw,640px);
+  display:flex;flex-direction:column;align-items:center;z-index:3;
+}
+.screen{
+  width:100%;aspect-ratio:1.85;position:relative;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.08) 0 1px, transparent 1.6px) 0 0/7px 7px,
+    linear-gradient(160deg,#5D9BD6,var(--led) 55%,#3D78B4);
+  border:clamp(8px,1.1vw,14px) solid #1E2430;border-radius:3px;
+  box-shadow:0 0 0 2px var(--ink), 6px 8px 0 rgba(34,20,15,.35);
+  display:flex;align-items:center;padding:clamp(14px,2.6vw,34px);
+}
+.led{
+  margin:0;font-family:var(--led-face);font-weight:900;text-transform:uppercase;
+  font-size:clamp(18px,2.7vw,38px);line-height:1.15;letter-spacing:.04em;color:var(--led-glow);
+  text-shadow:0 0 6px rgba(234,245,255,.85),0 0 18px rgba(170,215,255,.6);
+  transition:opacity .12s;
+}
+.led.off{opacity:0}
+.legs{display:flex;gap:42%;width:100%;justify-content:center}
+.leg{width:clamp(14px,1.8vw,22px);height:clamp(90px,13vw,190px);background:linear-gradient(90deg,#2A2F3A,#454C5A 45%,#23272F);border:2px solid var(--ink);border-top:0}
+
+/* foto colada */
+.cutout{
+  position:absolute;left:6%;bottom:6%;width:clamp(150px,21vw,290px);margin:0;z-index:4;
+  background:var(--paper);padding:10px 10px 34px;transform:rotate(-4deg);
+  box-shadow:5px 7px 0 rgba(34,20,15,.35);border:1px solid rgba(34,20,15,.25);
+}
+.cutout img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;filter:saturate(1.08) contrast(1.05)}
+.cutout figcaption{position:absolute;left:0;right:0;bottom:7px;text-align:center;font-family:var(--label);font-size:12px;color:var(--cocoa)}
+.tape{position:absolute;top:-14px;left:50%;width:92px;height:26px;transform:translateX(-50%) rotate(3deg);background:rgba(250,227,177,.82);border:1px solid rgba(34,20,15,.12)}
+
+.sticker{
+  position:absolute;left:31%;bottom:24%;z-index:5;
+  width:clamp(96px,10vw,132px);aspect-ratio:1;border-radius:50%;
+  background:var(--mustard);border:2px solid var(--ink);transform:rotate(12deg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--display);font-weight:900;font-size:clamp(17px,1.8vw,23px);line-height:.95;color:var(--ink);
+  box-shadow:3px 3px 0 var(--ink);
+}
+.sticker small{font-family:var(--label);font-weight:400;font-size:10px;margin-top:5px;letter-spacing:0}
+
+/* faixa abaixo da cena */
+.hero-info{background:var(--sand);border-bottom:2px solid var(--ink)}
+.hero-info .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:end;padding-block:clamp(32px,5vw,56px)}
+.wordmark{font-family:var(--display);font-weight:900;font-size:clamp(104px,19vw,232px);line-height:.8;margin:0;color:var(--wine);letter-spacing:-.01em}
+.hero-info .kicker{font-size:clamp(18px,2.1vw,22px);font-weight:500;line-height:1.45;margin:0 0 22px;max-width:34ch}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+
+/* letreiro corrido */
+.ticker{background:var(--jeans-dk);border-bottom:2px solid var(--ink);overflow:hidden;padding-block:14px}
+.ticker-track{display:flex;width:max-content;animation:tick 48s linear infinite}
+.ticker span{
+  font-family:var(--led-face);font-weight:900;text-transform:uppercase;font-size:clamp(18px,2.4vw,26px);
+  color:var(--led-glow);letter-spacing:.06em;white-space:nowrap;padding-right:48px;
+  text-shadow:0 0 6px rgba(234,245,255,.7);
+}
+.ticker span i{font-style:normal;color:var(--mustard);text-shadow:none;margin-left:48px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ===== música ===== */
+#musica{background:var(--paper)}
+#musica .label{color:var(--wine)}
+#musica h2{color:var(--wine)}
+.ep{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,64px);align-items:center;margin-top:8px}
+.ep-cover{
+  aspect-ratio:1;max-width:100%;position:relative;transform:rotate(-2deg);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.09) 0 1px, transparent 1.6px) 0 0/8px 8px,
+    linear-gradient(150deg,#5D9BD6,var(--led) 50%,var(--jeans));
+  border:14px solid #1E2430;box-shadow:0 0 0 2px var(--ink),8px 10px 0 var(--mustard);
+  display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,32px);
+}
+.ep-cover p{margin:0;font-family:var(--led-face);font-weight:900;text-transform:uppercase;color:var(--led-glow);
+  font-size:clamp(28px,4.4vw,52px);line-height:1.05;letter-spacing:.04em;text-shadow:0 0 8px rgba(234,245,255,.8)}
+.ep-cover small{font-family:var(--led-face);font-weight:700;font-size:clamp(14px,1.6vw,18px);color:var(--led-glow);letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+.ep-star{position:absolute;right:-26px;top:-26px;width:74px;height:74px}
+.meta{display:flex;flex-direction:column;gap:18px;min-width:0}
+.meta-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding-top:14px;border-top:2px solid var(--ink)}
+.meta-row dt{font-family:var(--label);font-size:13px;color:var(--cocoa);padding-top:3px}
+.meta-row dd{margin:0;font-size:19px;font-weight:500}
+.meta-row dd b{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.05;color:var(--wine);display:block}
+dl{margin:0}
+
+.conceito{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.6vw,42px);line-height:1.1;color:var(--ink);margin:-4px 0 16px;max-width:24ch;text-wrap:balance}
+#musica .lede{margin-bottom:clamp(36px,5vw,56px)}
+.lanc{margin-top:clamp(56px,8vw,88px)}
+.lanc h3{font-family:var(--display);font-weight:700;font-size:clamp(32px,4vw,44px);margin:0 0 20px;color:var(--ink)}
+.stub .desc{display:block;font-size:16px;line-height:1.45;margin:0 0 14px}
+.disco{margin-top:clamp(56px,8vw,88px)}
+.disco h3{font-family:var(--display);font-weight:700;font-size:clamp(32px,4vw,44px);margin:0 0 20px;color:var(--ink)}
+.stubs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.stub{
+  position:relative;background:var(--sand);border:2px solid var(--ink);padding:20px 22px 22px;
+  box-shadow:4px 4px 0 var(--ink);
+}
+.stub:nth-child(2){background:var(--paper)}
+.stub:nth-child(3){background:var(--mustard)}
+.stub .tipo{display:block;font-family:var(--label);font-size:13px;color:var(--cocoa)}
+.stub .nome{display:block;font-family:var(--display);font-weight:700;font-size:clamp(28px,3vw,36px);line-height:1;margin:8px 0 10px}
+.stub .quando{display:inline-block;font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-top:2px dotted var(--ink);padding-top:8px}
+.disco .nota{margin:20px 0 0;font-size:15px;color:var(--cocoa)}
+
+/* ===== universo ===== */
+#universo{background:var(--ink);color:var(--paper);border-top:2px solid var(--ink)}
+#universo .label{color:var(--mustard)}
+#universo h2{color:var(--paper)}
+#universo .lede{color:var(--on-cocoa)}
+#universo > .wrap{padding-block:clamp(44px,6vw,72px)}
+#universo h2{font-size:clamp(36px,5vw,60px);margin-bottom:20px}
+.pilares{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.pilar{position:relative;border:2px solid var(--paper);padding:16px 16px 18px;box-shadow:4px 4px 0 var(--paper);min-width:0}
+.pilar:nth-child(odd){transform:rotate(-1.2deg)}
+.pilar:nth-child(even){transform:rotate(1deg)}
+.pilar h3{font-family:var(--display);font-weight:700;font-size:clamp(22px,2vw,26px);line-height:1;margin:10px 0 6px}
+.pilar p{margin:0;font-size:14.5px;line-height:1.45}
+.pilar-star{width:28px;height:28px}
+.pilar-star polygon{stroke:var(--ink);stroke-width:3}
+.p1{background:var(--sky);color:var(--ink)} .p1 .pilar-star polygon{fill:var(--paper)}
+.p2{background:var(--olive);color:var(--ink)} .p2 .pilar-star polygon{fill:var(--mustard)}
+.p3{background:var(--wine);color:var(--sand)} .p3 .pilar-star polygon{fill:var(--mustard)}
+.p4{background:var(--mustard);color:var(--ink)} .p4 .pilar-star polygon{fill:var(--jeans)}
+
+/* ===== quem escuta ===== */
+#audiencia{background:var(--mustard);color:var(--ink);border-block:2px solid var(--ink)}
+#audiencia .label{color:var(--ink)}
+#audiencia h2{color:var(--ink)}
+.aud{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(28px,5vw,64px);align-items:end}
+.aud-big .big{display:block;font-family:var(--display);font-weight:900;font-size:clamp(110px,16vw,200px);line-height:.85;color:var(--wine)}
+.aud-big p{margin:12px 0 0;font-size:clamp(18px,2vw,21px);font-weight:500;max-width:30ch}
+.perfil{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.perfil > div{background:var(--paper);border:2px solid var(--ink);padding:18px;box-shadow:4px 4px 0 var(--ink);min-width:0}
+.perfil .n{display:block;font-family:var(--display);font-weight:700;font-size:clamp(40px,4.6vw,56px);line-height:1;color:var(--wine)}
+.perfil .l{display:block;font-size:15px;line-height:1.4;margin-top:8px}
+.frase{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.2vw,38px);line-height:1.15;margin:clamp(40px,6vw,64px) 0 14px;max-width:32ch;text-wrap:balance}
+.fonte{font-family:var(--label);font-size:12px;margin:0}
+
+/* ===== sobre ===== */
+#sobre{background:var(--cocoa);color:var(--sand);border-block:2px solid var(--ink)}
+#sobre .label{color:var(--on-cocoa)}
+#sobre h2{color:var(--sand);max-width:13ch}
+.sobre-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+#sobre .lede{color:var(--sand)}
+.fichas{display:flex;flex-direction:column;gap:14px}
+.ficha{background:var(--paper);color:var(--ink);padding:16px 18px;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--mustard)}
+.ficha:nth-child(odd){transform:rotate(-1deg)}
+.ficha:nth-child(even){transform:rotate(1deg)}
+.ficha span{display:block;font-family:var(--label);font-size:12px;color:var(--wine)}
+.ficha b{display:block;font-size:18px;line-height:1.35;margin-top:4px}
+
+/* ===== redes ===== */
+#redes{background:var(--jeans);color:var(--paper)}
+#redes .label{color:var(--on-jeans)}
+#redes h2{color:var(--paper)}
+#redes .lede{color:var(--on-jeans)}
+.redes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:28px}
+.rede{
+  display:flex;flex-direction:column;gap:8px;text-decoration:none;
+  background:#1E2430;border:2px solid var(--ink);padding:24px 24px 26px;
+  box-shadow:6px 6px 0 var(--mustard);transition:transform .12s,box-shadow .12s;
+}
+.rede:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--mustard)}
+.rede .plat{font-family:var(--label);font-size:13px;color:var(--on-jeans)}
+.rede .handle{font-family:var(--led-face);font-weight:900;font-size:clamp(30px,4vw,46px);color:var(--led-glow);text-shadow:0 0 8px rgba(234,245,255,.6);line-height:1.1;word-break:break-word}
+.rede .desc{font-size:16px;color:var(--on-jeans)}
+
+/* ===== shows ===== */
+#shows{background:var(--mustard);border-block:2px solid var(--ink)}
+#shows .label{color:var(--ink)}
+#shows h2{color:var(--ink)}
+.vazio{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;
+  background:var(--paper);border:2px dashed var(--ink);padding:clamp(20px,3vw,32px);
+}
+.vazio p{margin:0;font-size:clamp(18px,2vw,21px);max-width:46ch}
+.vazio p b{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.2vw,38px);display:block;line-height:1.05;margin-bottom:8px}
+
+/* ===== contato ===== */
+#contato{background:var(--wine);color:var(--sand);border-top:2px solid var(--ink)}
+#contato .label{color:var(--on-wine)}
+#contato h2{color:var(--sand)}
+.quem{font-size:clamp(20px,2.4vw,25px);font-weight:700;margin:0 0 4px}
+.quem-sub{font-family:var(--label);font-size:13px;color:var(--on-wine);margin:0 0 28px}
+.linhas{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.linha{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.linha .tag{font-family:var(--label);font-size:12px;color:var(--on-wine);width:92px}
+.linha .val{font-size:clamp(18px,2.2vw,23px);font-weight:500;color:var(--sand);font-variant-numeric:tabular-nums;word-break:break-word;user-select:all}
+.copiar{
+  font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:transparent;color:var(--sand);border:1.5px solid var(--on-wine);padding:6px 10px;border-radius:2px;cursor:pointer;
+}
+.copiar:hover,.copiar[data-ok="1"]{background:var(--sand);color:var(--wine);border-color:var(--sand)}
+
+.rodape{background:var(--ink);color:var(--on-cocoa)}
+.rodape .wrap{padding-block:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--label);font-size:13px}
+.rodape a{text-decoration:none}
+.rodape a:hover{color:var(--sand)}
+
+/* ===== telas estreitas ===== */
+@media (max-width:860px){
+  .hero-info .wrap,.ep,.sobre-grid{grid-template-columns:1fr}
+  .stubs{grid-template-columns:1fr}
+  .ep-cover{max-width:420px}
+  .pilares{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .aud{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .nav{display:none}
+  .top .btn{margin-left:auto}
+  .scene{height:680px}
+  .billboard{right:50%;transform:translateX(50%);bottom:auto;top:9%;width:min(88%,420px)}
+  .leg{height:150px}
+  .grass{height:34%}
+  .cutout{left:5%;bottom:5%;width:46%}
+  .sticker{left:auto;right:7%;bottom:12%}
+  .redes{grid-template-columns:1fr}
+  .pilares{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .perfil{grid-template-columns:1fr}
+  .vazio{grid-template-columns:1fr}
+  .meta-row{grid-template-columns:1fr;gap:4px}
+  .star.hide-sm{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-track{animation:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#topo">Dody</a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#sobre">artista</a>
+      <a href="#musica">o disco</a>
+      <a href="#universo">estética</a>
+      <a href="#audiencia">quem escuta</a>
+      <a href="#redes">redes</a>
+      <a href="#contato">contato</a>
+    </nav>
+    <a class="btn" href="https://samply.app/player/92052a02-0b45-4200-b5bd-61b189c9822e?si=8CqmsvPzJphMpeAtDMUz377zkAC2" target="_blank" rel="noopener">Ouvir</a>
+  </div>
+</header>
+
+<main id="topo">
+  <!-- cena: céu, nuvem em chamas, estrelas, painel no pasto, foto colada -->
+  <section class="scene" aria-label="Painel de LED no pasto com a foto do Dody">
+    <svg class="fire" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <filter id="burn" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="3" seed="8" result="warp"/>
+          <feDisplacementMap in="SourceGraphic" in2="warp" scale="170" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.0042 0.0065" numOctaves="4" seed="21" result="tex"/>
+          <feColorMatrix in="tex" type="matrix" values="0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 0 1" result="gray"/>
+          <feComponentTransfer in="gray" result="stretch">
+            <feFuncR type="linear" slope="2.2" intercept="-0.55"/>
+            <feFuncG type="linear" slope="2.2" intercept="-0.55"/>
+            <feFuncB type="linear" slope="2.2" intercept="-0.55"/>
+          </feComponentTransfer>
+          <feComponentTransfer in="stretch" result="heat">
+            <feFuncR type="discrete" tableValues="0.36 0.49 0.68 0.83 0.94 0.98"/>
+            <feFuncG type="discrete" tableValues="0.09 0.125 0.17 0.635 0.80 0.89"/>
+            <feFuncB type="discrete" tableValues="0.11 0.153 0.16 0.12 0.30 0.69"/>
+          </feComponentTransfer>
+          <feComposite in="heat" in2="shape" operator="in"/>
+        </filter>
+      </defs>
+      <g filter="url(#burn)" fill="#000">
+        <circle cx="180" cy="360" r="170"/><circle cx="380" cy="280" r="200"/><circle cx="560" cy="360" r="150"/>
+        <circle cx="780" cy="250" r="215"/><circle cx="1000" cy="320" r="205"/><circle cx="1200" cy="240" r="225"/>
+        <circle cx="1410" cy="320" r="200"/><circle cx="1520" cy="170" r="150"/><circle cx="650" cy="150" r="115"/>
+        <circle cx="1060" cy="130" r="125"/><circle cx="90" cy="540" r="150"/><circle cx="430" cy="540" r="165"/>
+        <circle cx="1260" cy="540" r="175"/><circle cx="880" cy="520" r="140"/>
+      </g>
+    </svg>
+
+    <svg class="star" style="--s:clamp(46px,5vw,74px);left:6%;top:9%" viewBox="0 0 100 100" aria-hidden="true"><polygon fill="#D4A21F" stroke="#22140F" stroke-width="2" points="50.0,0.0 57.7,31.5 85.4,14.6 68.5,42.3 100.0,50.0 68.5,57.7 85.4,85.4 57.7,68.5 50.0,100.0 42.3,68.5 14.6,85.4 31.5,57.7 0.0,50.0 31.5,42.3 14.6,14.6 42.3,31.5"/></svg>
+    <svg class="star" style="--s:clamp(34px,3.6vw,54px);left:27%;top:5%" viewBox="0 0 100 100" aria-hidden="true"><polygon fill="#3E5F8A" stroke="#22140F" stroke-width="2" points="50.0,0.0 61.0,30.9 93.3,25.0 72.0,50.0 93.3,75.0 61.0,69.1 50.0,100.0 39.0,69.1 6.7,75.0 28.0,50.0 6.7,25.0 39.0,30.9"/></svg>
+    <svg class="star hide-sm" style="--s:clamp(40px,4vw,60px);right:4%;top:6%" viewBox="0 0 100 100" aria-hidden="true"><polygon fill="#7D2027" stroke="#22140F" stroke-width="2" points="50.0,0.0 61.0,30.9 93.3,25.0 72.0,50.0 93.3,75.0 61.0,69.1 50.0,100.0 39.0,69.1 6.7,75.0 28.0,50.0 6.7,25.0 39.0,30.9"/></svg>
+    <svg class="star hide-sm" style="--s:clamp(50px,5.4vw,82px);left:44%;top:40%" viewBox="0 0 100 100" aria-hidden="true"><polygon fill="#FAE3B1" stroke="#22140F" stroke-width="2" points="50.0,0.0 57.7,31.5 85.4,14.6 68.5,42.3 100.0,50.0 68.5,57.7 85.4,85.4 57.7,68.5 50.0,100.0 42.3,68.5 14.6,85.4 31.5,57.7 0.0,50.0 31.5,42.3 14.6,14.6 42.3,31.5"/></svg>
+
+    <div class="grass" aria-hidden="true"></div>
+
+    <div class="billboard">
+      <div class="screen">
+        <p class="led" id="led">Sertanejo pra quem ouve sertanejo — e pra quem acha que não ouve.</p>
+      </div>
+      <div class="legs" aria-hidden="true"><span class="leg"></span><span class="leg"></span></div>
+    </div>
+
+    <figure class="cutout">
+      <span class="tape" aria-hidden="true"></span>
+      <img src="dody.jpg" alt="Dody de chapéu e regata branca numa loja de botas, com vários cintos de fivela grande">
+      <figcaption>dody · são paulo</figcaption>
+    </figure>
+
+    <div class="sticker" aria-hidden="true">Indie<br>Nejo<small>içara → sp</small></div>
+  </section>
+
+  <section class="hero-info" aria-label="Apresentação">
+    <div class="wrap">
+      <h1 class="wordmark">Dody</h1>
+      <div>
+        <p class="kicker">Sertanejo de Içara que se mudou pra São Paulo sem tirar a bota. O álbum <em>Deselegante</em> vem aí.</p>
+        <div class="cta">
+          <a class="btn" href="https://samply.app/player/92052a02-0b45-4200-b5bd-61b189c9822e?si=8CqmsvPzJphMpeAtDMUz377zkAC2" target="_blank" rel="noopener">Ouvir</a>
+          <a class="btn alt" href="https://www.instagram.com/dodyfaf/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn alt" href="https://www.tiktok.com/@dodyfaf" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Deselegante vem aí<i>✦</i></span>
+      <span>Melodramático e deselegante<i>✦</i></span>
+      <span>De Içara pra São Paulo<i>✦</i></span>
+      <span>IndieNejo<i>✦</i></span>
+      <span>Deselegante vem aí<i>✦</i></span>
+      <span>Melodramático e deselegante<i>✦</i></span>
+      <span>De Içara pra São Paulo<i>✦</i></span>
+      <span>IndieNejo<i>✦</i></span>
+    </div>
+  </div>
+
+  <section class="band" id="sobre">
+    <div class="wrap">
+      <p class="label">o artista</p>
+      <h2>“Melodramático e Deselegante”</h2>
+      <div class="sobre-grid">
+        <div>
+          <p class="lede">Foi assim que um violonista se apresentou, numa praça de Içara, na noite em que Dody decidiu se mudar para São Paulo. A frase virou dois álbuns.</p>
+          <p class="lede">Compositor, Dody assina sozinho ou em parceria a maior parte do catálogo, da letra e da melodia ao conceito de cada disco. As músicas falam de amor, autoestima e sonhos.</p>
+        </div>
+        <div class="fichas">
+          <div class="ficha"><span>nome</span><b>Antônio Jorge Salvador da Silva</b></div>
+          <div class="ficha"><span>de</span><b>Içara, SC → São Paulo</b></div>
+          <div class="ficha"><span>catálogo</span><b>Sete projetos lançados</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="musica">
+    <div class="wrap">
+      <p class="label">o novo álbum</p>
+      <h2>Deselegante</h2>
+      <p class="conceito">O interior chega na cidade sem tirar a bota.</p>
+      <p class="lede">Um personagem do campo em queda livre pela cidade: nunca parado, sempre no meio de um salto, de uma fuga, de uma chegada. <em>Deselegante</em> transita entre diferentes sonoridades, do regionalismo da música gaúcha ao sertanejo, corrido tumbado e flamenco.</p>
+      <div class="ep">
+        <div class="ep-cover" role="img" aria-label="Painel de LED com o nome do álbum Deselegante">
+          <svg class="ep-star" viewBox="0 0 100 100" aria-hidden="true"><polygon fill="#D4A21F" stroke="#22140F" stroke-width="2" points="50.0,0.0 57.7,31.5 85.4,14.6 68.5,42.3 100.0,50.0 68.5,57.7 85.4,85.4 57.7,68.5 50.0,100.0 42.3,68.5 14.6,85.4 31.5,57.7 0.0,50.0 31.5,42.3 14.6,14.6 42.3,31.5"/></svg>
+          <small>Dody · álbum</small>
+          <p>Desele<br>gante</p>
+          <small>Em breve</small>
+        </div>
+        <div class="meta">
+          <dl>
+            <div class="meta-row"><dt>formato</dt><dd>Álbum completo</dd></div>
+            <div class="meta-row"><dt>status</dt><dd>Já está pronto. Lançamento em breve</dd></div>
+            <div class="meta-row"><dt>singles</dt><dd><b>Boiadeiro</b><b>Meio do Mato</b></dd></div>
+          </dl>
+          <div class="cta">
+            <a class="btn dark" href="https://samply.app/player/92052a02-0b45-4200-b5bd-61b189c9822e?si=8CqmsvPzJphMpeAtDMUz377zkAC2" target="_blank" rel="noopener">Ouvir</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="lanc">
+        <h3>Três lançamentos, uma viagem</h3>
+        <div class="stubs">
+          <div class="stub"><span class="tipo">1º single</span><span class="nome">Boiadeiro</span><span class="desc">O campo com humor: bota, chapéu e pasto.</span><span class="quando">Já já no ar</span></div>
+          <div class="stub"><span class="tipo">2º single</span><span class="nome">Meio do Mato</span><span class="desc">O tombo no mato, com o céu azul de fundo.</span><span class="quando">Já já no ar</span></div>
+          <div class="stub"><span class="tipo">álbum completo</span><span class="nome">Deselegante</span><span class="desc">A estrada até São Paulo, vista pelo retrovisor.</span><span class="quando">Em breve</span></div>
+        </div>
+      </div>
+
+      <div class="disco">
+        <h3>Discografia</h3>
+        <div class="stubs">
+          <div class="stub"><span class="tipo">álbum</span><span class="nome">Melodramático</span><span class="quando">Dezembro de 2023</span></div>
+          <div class="stub"><span class="tipo">ep</span><span class="nome">Revolução Silenciosa</span><span class="quando">Julho de 2026</span></div>
+          <div class="stub"><span class="tipo">álbum</span><span class="nome">Deselegante</span><span class="quando">Em breve</span></div>
+        </div>
+        <p class="nota">Sete projetos lançados desde <em>Te Vi Passar</em>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="universo">
+    <div class="wrap">
+      <p class="label">a estética visual do disco</p>
+      <h2>Quatro pilares</h2>
+      <div class="pilares">
+        <article class="pilar p1">
+          <svg class="pilar-star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 57.7,31.5 85.4,14.6 68.5,42.3 100.0,50.0 68.5,57.7 85.4,85.4 57.7,68.5 50.0,100.0 42.3,68.5 14.6,85.4 31.5,57.7 0.0,50.0 31.5,42.3 14.6,14.6 42.3,31.5"/></svg>
+          <h3>Suspensão</h3>
+          <p>Nunca parado. Pulos e quedas contra o céu azul, com a câmera de baixo.</p>
+        </article>
+        <article class="pilar p2">
+          <svg class="pilar-star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 61.0,30.9 93.3,25.0 72.0,50.0 93.3,75.0 61.0,69.1 50.0,100.0 39.0,69.1 6.7,75.0 28.0,50.0 6.7,25.0 39.0,30.9"/></svg>
+          <h3>Campo como moda</h3>
+          <p>Bota, chapéu, ovelha e grama tratados como editorial. O campo com humor, nunca cartão-postal.</p>
+        </article>
+        <article class="pilar p3">
+          <svg class="pilar-star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 57.7,31.5 85.4,14.6 68.5,42.3 100.0,50.0 68.5,57.7 85.4,85.4 57.7,68.5 50.0,100.0 42.3,68.5 14.6,85.4 31.5,57.7 0.0,50.0 31.5,42.3 14.6,14.6 42.3,31.5"/></svg>
+          <h3>Estrada e flash</h3>
+          <p>O retrovisor da mudança e a cidade à noite no flash. Olhar pra trás enquanto vai.</p>
+        </article>
+        <article class="pilar p4">
+          <svg class="pilar-star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 61.0,30.9 93.3,25.0 72.0,50.0 93.3,75.0 61.0,69.1 50.0,100.0 39.0,69.1 6.7,75.0 28.0,50.0 6.7,25.0 39.0,30.9"/></svg>
+          <h3>Grafismo</h3>
+          <p>A palavra invade a foto: outdoor com versos no meio do campo e o nome do disco rabiscado à mão.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="audiencia">
+    <div class="wrap">
+      <p class="label">quem escuta</p>
+      <h2>Audiência própria</h2>
+      <div class="aud">
+        <div class="aud-big">
+          <span class="big">29%</span>
+          <p>de quem ouve o Dody no Spotify vira seguidor. A média do mercado fica entre 10% e 15%.</p>
+        </div>
+        <div class="perfil">
+          <div><span class="n">86%</span><span class="l">do público tem entre 18 e 34 anos</span></div>
+          <div><span class="n">57%</span><span class="l">são mulheres</span></div>
+          <div><span class="n">SP</span><span class="l">é a cidade que mais escuta no Spotify</span></div>
+        </div>
+      </div>
+      <p class="frase">Criciúma lidera o Instagram. São Paulo lidera o Spotify. A mudança do disco já está desenhada no mapa de quem escuta.</p>
+      <p class="fonte">fonte: chartmetric · spotify e instagram</p>
+    </div>
+  </section>
+
+  <section class="band" id="redes">
+    <div class="wrap">
+      <p class="label">redes</p>
+      <h2>Todo dia no feed</h2>
+      <p class="lede">Violão na escada, o manual do caipira em São Paulo e o desafio Pula Comigo.</p>
+      <div class="redes">
+        <a class="rede" href="https://www.tiktok.com/@dodyfaf" target="_blank" rel="noopener">
+          <span class="plat">tiktok</span><span class="handle">@dodyfaf</span><span class="desc">Vídeos novos todos os dias</span>
+        </a>
+        <a class="rede" href="https://www.instagram.com/dodyfaf/" target="_blank" rel="noopener">
+          <span class="plat">instagram</span><span class="handle">@dodyfaf</span><span class="desc">Reels, bastidores e Stories</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="contato">
+    <div class="wrap">
+      <h2>Contato</h2>
+      <p class="quem">Johayna El Mouallem</p>
+      <p class="quem-sub">mouallem management</p>
+      <div class="linhas">
+        <div class="linha"><span class="tag">e-mail</span><span class="val" id="v-mail">Jo@mouallemmgmt.com</span><button class="copiar" type="button" id="c-mail" data-copy="Jo@mouallemmgmt.com">Copiar</button></div>
+        <div class="linha"><span class="tag">brasil</span><span class="val" id="v-br">+55 11 97206-9864</span><button class="copiar" type="button" id="c-br" data-copy="+55 11 97206-9864">Copiar</button></div>
+        <div class="linha"><span class="tag">eua</span><span class="val" id="v-us">+1 310 729-5548</span><button class="copiar" type="button" id="c-us" data-copy="+1 310 729-5548">Copiar</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <span>mouallemmgmt</span>
+    <span>© 2026 Dody</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // painel de LED pisca a frase, como letreiro de beira de estrada
+  var led = document.getElementById("led");
+  var calmo = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (led && !calmo) {
+    setInterval(function(){
+      led.classList.add("off");
+      setTimeout(function(){ led.classList.remove("off"); }, 380);
+    }, 3200);
+  }
+
+  // botões de copiar
+  document.querySelectorAll(".copiar").forEach(function(b){
+    b.addEventListener("click", function(){
+      var txt = b.getAttribute("data-copy");
+      function ok(){ b.textContent = "Copiado"; b.setAttribute("data-ok","1");
+        setTimeout(function(){ b.textContent = "Copiar"; b.removeAttribute("data-ok"); }, 1800); }
+      function selecionar(){
+        var alvo = b.previousElementSibling;
+        var r = document.createRange(); r.selectNodeContents(alvo);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        b.textContent = "Selecionado";
+        setTimeout(function(){ b.textContent = "Copiar"; }, 1800);
+      }
+      try {
+        navigator.clipboard.writeText(txt).then(ok, selecionar);
+      } catch(e) { selecionar(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
